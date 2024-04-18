@@ -1,0 +1,16 @@
+FROM registry.fedoraproject.org/fedora-toolbox:39
+
+USER root
+
+ARG NAME=vue_environment
+LABEL name="$NAME" \
+    summary="Vue.js environment" \
+    maintainer="Kingoftime"
+ENV EDITOR=nano
+
+RUN dnf -y upgrade \
+    && dnf -y install zsh nodejs \
+    && dnf clean all \
+
+RUN npm install -g @vue/cli
+  

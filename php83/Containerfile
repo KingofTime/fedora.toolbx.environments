@@ -1,0 +1,18 @@
+FROM registry.fedoraproject.org/fedora-toolbox:39
+
+USER root
+
+ARG NAME=vue_environment
+LABEL name="$NAME" \
+    summary="PHP 8.3 environment" \
+    maintainer="Kingoftime"
+ENV EDITOR=nano
+
+RUN dnf -y upgrade \
+    && dnf -y install https://rpms.remirepo.net/fedora/remi-release-39.rpm \
+    && dnf -y install zsh
+
+RUN dnf config-manager --set-enabled remi \
+    && dnf module reset php -y \
+    && dnf module install php:remi-8.3 -y
+

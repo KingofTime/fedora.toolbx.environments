@@ -1,0 +1,17 @@
+FROM registry.fedoraproject.org/fedora-toolbox:39
+
+USER root
+
+ARG NAME=python_environment
+LABEL name="$NAME" \
+    summary="Python environment" \
+    maintainer="Kingoftime"
+ENV EDITOR=nano
+
+
+RUN dnf -y upgrade \
+    && dnf -y install zsh python python3-pip \
+    && curl -sSL https://install.python-poetry.org | POETRY_HOME=/etc/poetry python3 - \
+
+ENV PATH="/etc/poetry/bin:${PATH}"
+  
